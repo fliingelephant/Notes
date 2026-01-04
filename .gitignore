@@ -1,0 +1,13 @@
+# LaTeX intermediate files
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.fls
+*.out
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+
+*.DS_Store
