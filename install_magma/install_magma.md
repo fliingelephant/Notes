@@ -63,5 +63,5 @@
 5. **Install**
     
     ```bash
-    make install
+    sudo make install
     ```

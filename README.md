@@ -1,8 +1,10 @@
 This repository organizes notes by topic in separate folders. This root `README.md` serves as a guideline for composing, organizing, and modifying notes.
 
-For each run, create a folder-specific `AGENTS.md` and delete it afterward. Without explicit user instructions, do not read or index files from folders other than the current one, unless for syntax reference.
+- For each run, create a folder-specific `AGENTS.md` and delete it afterward. Without explicit user instructions, do not read or index files from folders other than the current one, unless for syntax reference.
 
-When compiling to PDF, use a suffix indicating the source type (e.g., `{topic}.tex` → `{topic}_latex.pdf`, `{topic}.typ` → `{topic}_typst.pdf`, `{topic}.md` → `{topic}_markdown.pdf`).
+- When compiling to PDF, use a suffix indicating the source type (e.g., `{topic}.tex` → `{topic}_latex.pdf`, `{topic}.typ` → `{topic}_typst.pdf`, `{topic}.md` → `{topic}_markdown.pdf`).
+
+- Put all references in a `refs.bib` for each topic.
 
 ## Typst 
 
