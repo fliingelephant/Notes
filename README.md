@@ -4,6 +4,9 @@ This repository organizes notes by topic in separate folders. This root `README.
 
 - When compiling to PDF, use a suffix indicating the source type (e.g., `{topic}.tex` → `{topic}_latex.pdf`, `{topic}.typ` → `{topic}_typst.pdf`, `{topic}.md` → `{topic}_markdown.pdf`).
 
+## Genereal
+
+- Put important equations or definitions in a box.
 - Put all references in a `refs.bib` for each topic.
 
 ## Typst 
