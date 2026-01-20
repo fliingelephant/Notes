@@ -240,6 +240,26 @@ x = potrs(A, b, T_A=128, mesh=mesh, in_specs=(P("x", None), P(None, None)))
   caption: [`potrs` function parameters],
 )
 
+== Blocked Cholesky and Cyclic Column Sharding
+
+cuSolverMg uses a right-looking blocked Cholesky factorization. With tile size `T_A`, the matrix is
+partitioned into `T_A x T_A` tiles. The `k`-th block column (the panel) consists of tiles `A_(i k)`.
+Each iteration:
+
+- Factor the diagonal block: $A_(k k) -> L_(k k) L_(k k)^dagger$ (Cholesky on the current tile).
+- Panel solve: solve $L_(i k) L_(k k)^dagger = A_(i k)$ for $L_(i k)$ (TRSM on the column panel).
+- Trailing update: $A_(i j) = A_(i j) - L_(i k) L_(j k)^dagger$ (GEMM/SYRK on the remaining tiles).
+
+The GPU that owns block column `k` performs the diagonal factorization and panel solve; then all GPUs
+apply trailing updates to their local tiles.
+
+JAXMg balances this with a 1D block-cyclic column layout: columns are assigned to devices in
+round-robin tiles of width `T_A` instead of contiguous chunks. This spreads panel ownership, reduces
+idle time, and avoids a single GPU owning all early columns. Without cyclic sharding, early panels
+land on one GPU, so others wait for panel data before updating. Internally, JAXMg permutes column
+tiles into cyclic order using peer-to-peer copies and small staging buffers; the redistribution is
+deterministic and hidden from the JAX API.
+
 == Internal Workflow
 
 #figure(
